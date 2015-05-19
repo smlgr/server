@@ -12,5 +12,4 @@ public class InverterDAO extends AbstractDAO<Inverter> {
     public InverterDAO() {
         setClazz(Inverter.class);
     }
-
 }

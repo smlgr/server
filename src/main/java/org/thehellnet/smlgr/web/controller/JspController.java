@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
  * Created by sardylan on 19/05/15.
  */
 @Controller
-class HelloWorldController extends MultiActionController {
+public class JspController extends MultiActionController {
     @RequestMapping("/")
     public ModelAndView index(HttpServletRequest request, HttpServletResponse response) throws Exception {
         return new ModelAndView("index");

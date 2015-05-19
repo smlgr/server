@@ -3,10 +3,7 @@ package org.thehellnet.smlgr.web.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.thehellnet.smlgr.web.model.DataPayload;
 import org.thehellnet.smlgr.web.model.Inverter;
 import org.thehellnet.smlgr.web.model.dto.DataPayloadDTO;
@@ -20,7 +17,7 @@ import java.util.List;
 /**
  * Created by sardylan on 16/05/15.
  */
-@Controller
+@RestController
 @RequestMapping(value = "/api/inverter")
 @Scope(value = "request")
 public class InverterApiController {
@@ -46,17 +43,33 @@ public class InverterApiController {
         return JsonResponse.createInstance(true, content);
     }
 
-    @RequestMapping(value = "/{inverter_id}/payload", method = RequestMethod.POST, consumes = "application/json")
-    public JsonResponse ReceiveDataPayload(@PathVariable("inverter_id") long inverter_id,
-                                           @RequestBody DataPayloadDTO payloadDTO) {
-        Inverter inverter = inverterService.findById(inverter_id);
-        if (inverter != null) {
-            DataPayload payload = new DataPayload(payloadDTO);
-            payload.setInverter(inverter);
-            dataPayloadService.persist(payload);
-            return JsonResponse.createInstance(true);
+    @RequestMapping(value = "/{inverterId}/payload", method = RequestMethod.POST, produces = "application/json")
+    public JsonResponse ReceiveDataPayload(@PathVariable("inverterId") long inverterId,
+                                           @RequestParam("dcVoltage") int dcVoltage,
+                                           @RequestParam("dcCurrent") int dcCurrent,
+                                           @RequestParam("acVoltage") int acVoltage,
+                                           @RequestParam("acCurrent") int acCurrent,
+                                           @RequestParam("outPower") int outPower,
+                                           @RequestParam("temp") int temp,
+                                           @RequestParam("frequency") int frequency,
+                                           @RequestParam("todayProduction") int todayProduction) {
+        Inverter inverter = inverterService.findById(inverterId);
+        if (inverter == null) {
+            return JsonResponse.createErrorInstance("Inverter not found");
         }
 
-        return JsonResponse.createErrorInstance("Inverter not found");
+        DataPayload payload = new DataPayload();
+        payload.setInverter(inverter);
+        payload.setDcVoltage(dcVoltage);
+        payload.setDcCurrent(dcCurrent);
+        payload.setAcVoltage(acVoltage);
+        payload.setAcCurrent(acCurrent);
+        payload.setOutPower(outPower);
+        payload.setTemp(temp);
+        payload.setFrequency(frequency);
+        payload.setTodayProduction(todayProduction);
+        dataPayloadService.persist(payload);
+
+        return JsonResponse.createInstance(true);
     }
 }

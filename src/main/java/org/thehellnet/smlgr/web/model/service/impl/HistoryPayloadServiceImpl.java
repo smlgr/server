@@ -21,7 +21,6 @@ public class HistoryPayloadServiceImpl extends AbstractServiceImpl<HistoryPayloa
         this.dao = dao;
     }
 
-
     @Override
     public List<HistoryPayload> getToday() {
         return dao.getToday();

@@ -1,5 +1,6 @@
 package org.thehellnet.smlgr.web.model.service.impl;
 
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -24,7 +25,43 @@ public class DataPayloadServiceImpl extends AbstractServiceImpl<DataPayload, Dat
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED, readOnly = true)
-    public DataPayload findLast() {
-        return dao.findLast();
+    public DataPayload findLastByInverterId(long inverterId) {
+        return dao.findLastByInverterId(inverterId);
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = true)
+    public DataPayload findTodayFirstByInverterId(long inverterId) {
+        return dao.findTodayFirstByInverterId(inverterId);
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = true)
+    public DataPayload findTodayLastByInverterId(long inverterId) {
+        return dao.findTodayLastByInverterId(inverterId);
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = true)
+    public DataPayload findTodayMaxByInverterId(long inverterId) {
+        return dao.findTodayMaxByInverterId(inverterId);
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = true)
+    public DataPayload findYesterdayFirstByInverterId(long inverterId) {
+        return dao.findYesterdayFirstByInverterId(inverterId);
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = true)
+    public DataPayload findYesterdayLastByInverterId(long inverterId) {
+        return dao.findYesterdayLastByInverterId(inverterId);
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = true)
+    public DataPayload findYesterdayMaxByInverterId(long inverterId) {
+        return dao.findYesterdayMaxByInverterId(inverterId);
     }
 }

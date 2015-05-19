@@ -37,6 +37,7 @@ public class Inverter implements Serializable {
         this.user = user;
     }
 
+    @Basic
     @Column(name = "producer",  nullable = true)
     public String getProducer() {
         return producer;
@@ -46,6 +47,7 @@ public class Inverter implements Serializable {
         this.producer = producer;
     }
 
+    @Basic
     @Column(name = "model", nullable = true)
     public String getModel() {
         return model;
@@ -55,6 +57,7 @@ public class Inverter implements Serializable {
         this.model = model;
     }
 
+    @Basic
     @Column(name = "max_power", nullable = false)
     public int getMaxPower() {
         return maxPower;
