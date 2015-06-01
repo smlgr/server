@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import org.thehellnet.smlgr.web.model.HistoryPayload;
 
 import javax.persistence.NoResultException;
+import javax.persistence.Query;
 import java.util.List;
 
 /**
@@ -34,16 +35,15 @@ public class HistoryPayloadDAO extends AbstractDAO<HistoryPayload> {
     }
 
     public List<HistoryPayload> getInterval(DateTime startTime, DateTime stopTime) {
-        if(startTime == null || stopTime == null) {
+        if (startTime == null || stopTime == null) {
             return null;
         }
 
         try {
-            return (List<HistoryPayload>) entityManager
-                    .createQuery("SELECT h FROM HistoryPayload h WHERE h.whenquery BETWEEN :startTime AND :stopTime")
-                    .setParameter("startTime", startTime.toDateTime())
-                    .setParameter("stopTime", stopTime.toDateTime())
-                    .getResultList();
+            Query query = entityManager.createQuery("SELECT h FROM HistoryPayload h WHERE h.whenquery BETWEEN :startTime AND :stopTime");
+            query.setParameter("startTime", startTime.toDateTime());
+            query.setParameter("stopTime", stopTime.toDateTime());
+            return (List<HistoryPayload>) query.getResultList();
         } catch (NoResultException e) {
             return null;
         }

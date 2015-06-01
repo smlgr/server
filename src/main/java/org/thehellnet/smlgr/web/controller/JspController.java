@@ -13,8 +13,17 @@ import javax.servlet.http.HttpServletResponse;
  */
 @Controller
 public class JspController extends MultiActionController {
-    @RequestMapping("/")
-    public ModelAndView index(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        return new ModelAndView("index");
+    @RequestMapping({"/today", "/"})
+    public ModelAndView today(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView graph = new ModelAndView("graph");
+        graph.addObject("action", "today");
+        return graph;
+    }
+
+    @RequestMapping({"/yesterday"})
+    public ModelAndView yesterday(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView graph = new ModelAndView("graph");
+        graph.addObject("action", "yesterday");
+        return graph;
     }
 }

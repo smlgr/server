@@ -33,7 +33,7 @@ public class HistoryPayload {
         this.whenquery = whenquery;
     }
 
-    @Basic
+    @Basic(fetch = FetchType.LAZY)
     @Column(name = "udc", unique = true, nullable = false, insertable = false, updatable = false)
     public int getUdc() {
         return udc;
@@ -43,7 +43,7 @@ public class HistoryPayload {
         this.udc = udc;
     }
 
-    @Basic
+    @Basic(fetch = FetchType.LAZY)
     @Column(name = "idc", unique = true, nullable = false, insertable = false, updatable = false)
     public int getIdc() {
         return idc;
@@ -53,7 +53,7 @@ public class HistoryPayload {
         this.idc = idc;
     }
 
-    @Basic
+    @Basic(fetch = FetchType.LAZY)
     @Column(name = "ul1", unique = true, nullable = false, insertable = false, updatable = false)
     public int getUl1() {
         return ul1;
@@ -63,7 +63,7 @@ public class HistoryPayload {
         this.ul1 = ul1;
     }
 
-    @Basic
+    @Basic(fetch = FetchType.LAZY)
     @Column(name = "il1", unique = true, nullable = false, insertable = false, updatable = false)
     public int getIl1() {
         return il1;
@@ -73,7 +73,7 @@ public class HistoryPayload {
         this.il1 = il1;
     }
 
-    @Basic
+    @Basic(fetch = FetchType.LAZY)
     @Column(name = "pac", unique = true, nullable = false, insertable = false, updatable = false)
     public int getPac() {
         return pac;
@@ -83,7 +83,7 @@ public class HistoryPayload {
         this.pac = pac;
     }
 
-    @Basic
+    @Basic(fetch = FetchType.LAZY)
     @Column(name = "prl", unique = true, nullable = false, insertable = false, updatable = false)
     public int getPrl() {
         return prl;
@@ -93,7 +93,7 @@ public class HistoryPayload {
         this.prl = prl;
     }
 
-    @Basic
+    @Basic(fetch = FetchType.LAZY)
     @Column(name = "tkk", unique = true, nullable = false, insertable = false, updatable = false)
     public int getTkk() {
         return tkk;
@@ -103,7 +103,7 @@ public class HistoryPayload {
         this.tkk = tkk;
     }
 
-    @Basic
+    @Basic(fetch = FetchType.LAZY)
     @Column(name = "tnf", unique = true, nullable = false, insertable = false, updatable = false)
     public int getTnf() {
         return tnf;
@@ -113,7 +113,7 @@ public class HistoryPayload {
         this.tnf = tnf;
     }
 
-    @Basic
+    @Basic(fetch = FetchType.LAZY)
     @Column(name = "kdy", unique = true, nullable = false, insertable = false, updatable = false)
     public int getKdy() {
         return kdy;

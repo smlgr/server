@@ -64,4 +64,24 @@ public class DataPayloadServiceImpl extends AbstractServiceImpl<DataPayload, Dat
     public DataPayload findYesterdayMaxByInverterId(long inverterId) {
         return dao.findYesterdayMaxByInverterId(inverterId);
     }
+
+    @Override
+    public List<DataPayload> getToday() {
+        return dao.getToday();
+    }
+
+    @Override
+    public List<DataPayload> getYesterday() {
+        return dao.getYesterday();
+    }
+
+    @Override
+    public List<DataPayload> getDay(DateTime day) {
+        return dao.getDay(day);
+    }
+
+    @Override
+    public List<DataPayload> getInterval(DateTime startTime, DateTime stopTime) {
+        return dao.getInterval(startTime, stopTime);
+    }
 }

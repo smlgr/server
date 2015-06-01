@@ -32,11 +32,11 @@
     $(function () {
         Highcharts.setOptions({
             global: {
-                useUTC: false
+                useUTC: true
             }
         });
 
-        $.getJSON("api/history/today", function (response) {
+        $.getJSON("api/history/<%= request.getAttribute("action") %>", function (response) {
             renderChart(response.data);
         });
 
@@ -58,8 +58,8 @@
                     },
                     type: "datetime",
                     dateTimeLabelFormats: {
-                        hour: '%H:%m',
-                        minute: '%H:%m'
+                        hour: '%H:%M',
+                        minute: '%H:%M'
                     }
                 },
                 yAxis: {

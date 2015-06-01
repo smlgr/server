@@ -1,6 +1,7 @@
 package org.thehellnet.smlgr.web.model.dto;
 
 import org.joda.time.DateTime;
+import org.thehellnet.smlgr.web.model.DataPayload;
 import org.thehellnet.smlgr.web.model.Inverter;
 
 import java.io.Serializable;
@@ -9,76 +10,110 @@ import java.io.Serializable;
  * Created by sardylan on 16/05/15.
  */
 public class DataPayloadDTO implements Serializable {
-    private int dcVoltage;
-    private int dcCurrent;
-    private int acVoltage;
-    private int acCurrent;
-    private int outPower;
-    private int temp;
-    private int frequency;
-    private int todayProduction;
+    private int ac_power;
+    private int ac_voltage;
+    private int ac_current;
+    private int ac_frequency;
+    private int dc1_voltage;
+    private int dc1_current;
+    private int dc2_voltage;
+    private int dc2_current;
+    private int temperature;
+    private int production;
 
-    public int getDcVoltage() {
-        return dcVoltage;
+    public DataPayloadDTO() {
     }
 
-    public void setDcVoltage(int dcVoltage) {
-        this.dcVoltage = dcVoltage;
+    public DataPayloadDTO(DataPayload payload) {
+        setAc_power(payload.getAcPower());
+        setAc_voltage(payload.getAcVoltage());
+        setAc_current(payload.getAcCurrent());
+        setAc_frequency(payload.getAcFrequency());
+        setDc1_voltage(payload.getDc1Voltage());
+        setDc1_current(payload.getDc1Current());
+        setDc2_voltage(payload.getDc2Voltage());
+        setDc2_current(payload.getDc2Current());
+        setTemperature(payload.getTemperature());
+        setProduction(payload.getProduction());
     }
 
-    public int getDcCurrent() {
-        return dcCurrent;
+    public int getAc_power() {
+        return ac_power;
     }
 
-    public void setDcCurrent(int dcCurrent) {
-        this.dcCurrent = dcCurrent;
+    public void setAc_power(int ac_power) {
+        this.ac_power = ac_power;
     }
 
-    public int getAcVoltage() {
-        return acVoltage;
+    public int getAc_voltage() {
+        return ac_voltage;
     }
 
-    public void setAcVoltage(int acVoltage) {
-        this.acVoltage = acVoltage;
+    public void setAc_voltage(int ac_voltage) {
+        this.ac_voltage = ac_voltage;
     }
 
-    public int getAcCurrent() {
-        return acCurrent;
+    public int getAc_current() {
+        return ac_current;
     }
 
-    public void setAcCurrent(int acCurrent) {
-        this.acCurrent = acCurrent;
+    public void setAc_current(int ac_current) {
+        this.ac_current = ac_current;
     }
 
-    public int getOutPower() {
-        return outPower;
+    public int getAc_frequency() {
+        return ac_frequency;
     }
 
-    public void setOutPower(int outPower) {
-        this.outPower = outPower;
+    public void setAc_frequency(int ac_frequency) {
+        this.ac_frequency = ac_frequency;
     }
 
-    public int getTemp() {
-        return temp;
+    public int getDc1_voltage() {
+        return dc1_voltage;
     }
 
-    public void setTemp(int temp) {
-        this.temp = temp;
+    public void setDc1_voltage(int dc1_voltage) {
+        this.dc1_voltage = dc1_voltage;
     }
 
-    public int getFrequency() {
-        return frequency;
+    public int getDc1_current() {
+        return dc1_current;
     }
 
-    public void setFrequency(int frequency) {
-        this.frequency = frequency;
+    public void setDc1_current(int dc1_current) {
+        this.dc1_current = dc1_current;
     }
 
-    public int getTodayProduction() {
-        return todayProduction;
+    public int getDc2_voltage() {
+        return dc2_voltage;
     }
 
-    public void setTodayProduction(int todayProduction) {
-        this.todayProduction = todayProduction;
+    public void setDc2_voltage(int dc2_voltage) {
+        this.dc2_voltage = dc2_voltage;
+    }
+
+    public int getDc2_current() {
+        return dc2_current;
+    }
+
+    public void setDc2_current(int dc2_current) {
+        this.dc2_current = dc2_current;
+    }
+
+    public int getTemperature() {
+        return temperature;
+    }
+
+    public void setTemperature(int temperature) {
+        this.temperature = temperature;
+    }
+
+    public int getProduction() {
+        return production;
+    }
+
+    public void setProduction(int production) {
+        this.production = production;
     }
 }

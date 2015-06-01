@@ -3,6 +3,7 @@ package org.thehellnet.smlgr.web.model;
 import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
 
 /**
  * Created by sardylan on 16/05/15.
@@ -26,8 +27,8 @@ public class User {
         this.id = id;
     }
 
-    @Basic
-    @Email
+    @Basic(fetch = FetchType.LAZY)
+    @Email(flags = Pattern.Flag.CASE_INSENSITIVE)
     @Column(name = "email",  nullable = false, length = 255, unique = true, updatable = false)
     public String getEmail() {
         return email;
@@ -37,6 +38,7 @@ public class User {
         this.email = username;
     }
 
+    @Basic(fetch = FetchType.LAZY)
     @Column(name = "password",  nullable = false)
     public String getPassword() {
         return password;

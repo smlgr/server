@@ -11,6 +11,7 @@ import java.io.Serializable;
 public class Inverter implements Serializable {
     private long id;
     private User user;
+    private String token;
     private String producer;
     private String model;
     private int maxPower;
@@ -27,7 +28,7 @@ public class Inverter implements Serializable {
         this.id = id;
     }
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="user_id", referencedColumnName = "id", nullable = false)
     public User getUser() {
         return user;
@@ -37,7 +38,17 @@ public class Inverter implements Serializable {
         this.user = user;
     }
 
-    @Basic
+    @Basic(fetch = FetchType.LAZY)
+    @Column(name = "token",  nullable = false)
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    @Basic(fetch = FetchType.LAZY)
     @Column(name = "producer",  nullable = true)
     public String getProducer() {
         return producer;
@@ -47,7 +58,7 @@ public class Inverter implements Serializable {
         this.producer = producer;
     }
 
-    @Basic
+    @Basic(fetch = FetchType.LAZY)
     @Column(name = "model", nullable = true)
     public String getModel() {
         return model;
@@ -57,7 +68,7 @@ public class Inverter implements Serializable {
         this.model = model;
     }
 
-    @Basic
+    @Basic(fetch = FetchType.LAZY)
     @Column(name = "max_power", nullable = false)
     public int getMaxPower() {
         return maxPower;

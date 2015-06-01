@@ -17,4 +17,9 @@ public class InverterServiceImpl extends AbstractServiceImpl<Inverter, InverterD
     public void setDao(InverterDAO dao) {
         this.dao = dao;
     }
+
+    @Override
+    public Inverter findByIdAndToken(long inverterId, String token) {
+        return dao.findByIdAndToken(inverterId, token);
+    }
 }
