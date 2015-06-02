@@ -36,7 +36,7 @@
             }
         });
 
-        $.getJSON("api/history/<%= request.getAttribute("action") %>", function (response) {
+        $.getJSON("api/query/<%= request.getAttribute("action") %>", function (response) {
             renderChart(response.data);
         });
 
