@@ -11,7 +11,10 @@ import java.io.Serializable;
  * Created by sardylan on 14/05/15.
  */
 @Entity
-@Table(name = "data_payload", schema = "public")
+@Table(name = "data_payload", schema = "public", indexes = {
+        @Index(name = "data_payload_whenquery_idx", columnList = "whenquery"),
+        @Index(name = "data_payload_ac_power_idx", columnList = "ac_power")
+})
 public class DataPayload implements Serializable {
     private long id;
     private DateTime dateTime;
