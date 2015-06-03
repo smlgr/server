@@ -32,7 +32,7 @@
     $(function () {
         Highcharts.setOptions({
             global: {
-                useUTC: true
+                useUTC: false
             }
         });
 
