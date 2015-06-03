@@ -86,7 +86,7 @@ public class QueryController {
             ArrayList<Long> item = new ArrayList<>();
 
             item.add(elem.getDateTime().getMillis());
-            item.add((long) elem.getAcPower());
+            item.add((long) elem.getAcPower() / 10);
 
             data.add(item);
         }
