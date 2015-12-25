@@ -5,9 +5,13 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>SolarMax LoGgeR</title>
+
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
     <script src="http://code.highcharts.com/stock/highstock.js"></script>
     <script src="http://code.highcharts.com/stock/modules/exporting.js"></script>
+
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
 </head>
 
 <body>
@@ -93,7 +97,31 @@
                         ]
                     }
                 }]
+            }, function (chart) {
+                setTimeout(function () {
+                    $('input.highcharts-range-selector', $(chart.container).parent())
+                            .datepicker();
+                }, 0);
             });
+
+            $.datepicker.setDefaults({
+                dateFormat: 'yyyy-mm-dd',
+                onSelect: function () {
+                    this.onchange();
+                    this.onblur();
+                },
+                onchange: function() {
+                    this.onchange();
+
+                    min = $('input.highcharts-range-selector[name="min"]').datepicker("option", "dateFormat", "yyyyMMdd ").val() + "000000";
+                    max = $('input.highcharts-range-selector[name="max"]').datepicker("option", "dateFormat", "yyyyMMdd ").val() + "000000";
+
+                    $.getJSON("api/query/interval/" + min + "/" + max, function (response) {
+                        renderChart(response.data);
+                    });
+                }
+            });
+
         }
     });
 </script>
