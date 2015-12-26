@@ -27,9 +27,9 @@ public class User {
         this.id = id;
     }
 
-    @Basic(fetch = FetchType.LAZY)
+    @Basic
     @Email(flags = Pattern.Flag.CASE_INSENSITIVE)
-    @Column(name = "email",  nullable = false, length = 255, unique = true, updatable = false)
+    @Column(name = "email", nullable = false, length = 255, unique = true)
     public String getEmail() {
         return email;
     }
@@ -38,8 +38,8 @@ public class User {
         this.email = username;
     }
 
-    @Basic(fetch = FetchType.LAZY)
-    @Column(name = "password",  nullable = false)
+    @Basic
+    @Column(name = "password", nullable = false, length = 128)
     public String getPassword() {
         return password;
     }

@@ -7,7 +7,7 @@ apply plugin: 'war'
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-war.archiveName = "apiserver.war"
+war.archiveName = "smlgr.war"
 
 repositories {
     mavenCentral()

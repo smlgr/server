@@ -1,119 +1,50 @@
 package org.thehellnet.smlgr.web.model.dto;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.joda.time.DateTime;
-import org.thehellnet.smlgr.web.model.DataPayload;
-import org.thehellnet.smlgr.web.model.Inverter;
-
-import java.io.Serializable;
+import org.thehellnet.smlgr.web.serializer.DateTimeJsonSerializer;
 
 /**
- * Created by sardylan on 16/05/15.
+ * Created by sardylan on 25/12/15.
  */
-public class DataPayloadDTO implements Serializable {
-    private int ac_power;
-    private int ac_voltage;
-    private int ac_current;
-    private int ac_frequency;
-    private int dc1_voltage;
-    private int dc1_current;
-    private int dc2_voltage;
-    private int dc2_current;
-    private int temperature;
-    private int production;
+public class DataPayloadDTO extends AbstractModelDTO {
+    @JsonSerialize(using = DateTimeJsonSerializer.class)
+    public DateTime dateTime;
+    public int acPower;
+    public int acVoltage;
+    public int acCurrent;
+    public int acFrequency;
+    public int dc1Voltage;
+    public int dc1Current;
+    public int dc2Voltage;
+    public int dc2Current;
+    public int temperature;
+    public int production;
 
     public DataPayloadDTO() {
     }
 
-    public DataPayloadDTO(DataPayload payload) {
-        setAc_power(payload.getAcPower());
-        setAc_voltage(payload.getAcVoltage());
-        setAc_current(payload.getAcCurrent());
-        setAc_frequency(payload.getAcFrequency());
-        setDc1_voltage(payload.getDc1Voltage());
-        setDc1_current(payload.getDc1Current());
-        setDc2_voltage(payload.getDc2Voltage());
-        setDc2_current(payload.getDc2Current());
-        setTemperature(payload.getTemperature());
-        setProduction(payload.getProduction());
-    }
-
-    public int getAc_power() {
-        return ac_power;
-    }
-
-    public void setAc_power(int ac_power) {
-        this.ac_power = ac_power;
-    }
-
-    public int getAc_voltage() {
-        return ac_voltage;
-    }
-
-    public void setAc_voltage(int ac_voltage) {
-        this.ac_voltage = ac_voltage;
-    }
-
-    public int getAc_current() {
-        return ac_current;
-    }
-
-    public void setAc_current(int ac_current) {
-        this.ac_current = ac_current;
-    }
-
-    public int getAc_frequency() {
-        return ac_frequency;
-    }
-
-    public void setAc_frequency(int ac_frequency) {
-        this.ac_frequency = ac_frequency;
-    }
-
-    public int getDc1_voltage() {
-        return dc1_voltage;
-    }
-
-    public void setDc1_voltage(int dc1_voltage) {
-        this.dc1_voltage = dc1_voltage;
-    }
-
-    public int getDc1_current() {
-        return dc1_current;
-    }
-
-    public void setDc1_current(int dc1_current) {
-        this.dc1_current = dc1_current;
-    }
-
-    public int getDc2_voltage() {
-        return dc2_voltage;
-    }
-
-    public void setDc2_voltage(int dc2_voltage) {
-        this.dc2_voltage = dc2_voltage;
-    }
-
-    public int getDc2_current() {
-        return dc2_current;
-    }
-
-    public void setDc2_current(int dc2_current) {
-        this.dc2_current = dc2_current;
-    }
-
-    public int getTemperature() {
-        return temperature;
-    }
-
-    public void setTemperature(int temperature) {
+    public DataPayloadDTO(DateTime dateTime,
+                          int acPower,
+                          int acVoltage,
+                          int acCurrent,
+                          int acFrequency,
+                          int dc1Voltage,
+                          int dc1Current,
+                          int dc2Voltage,
+                          int dc2Current,
+                          int temperature,
+                          int production) {
+        this.dateTime = dateTime;
+        this.acPower = acPower;
+        this.acVoltage = acVoltage;
+        this.acCurrent = acCurrent;
+        this.acFrequency = acFrequency;
+        this.dc1Voltage = dc1Voltage;
+        this.dc1Current = dc1Current;
+        this.dc2Voltage = dc2Voltage;
+        this.dc2Current = dc2Current;
         this.temperature = temperature;
-    }
-
-    public int getProduction() {
-        return production;
-    }
-
-    public void setProduction(int production) {
         this.production = production;
     }
 }

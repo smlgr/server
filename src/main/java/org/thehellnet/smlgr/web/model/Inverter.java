@@ -1,5 +1,7 @@
 package org.thehellnet.smlgr.web.model;
 
+import org.thehellnet.smlgr.web.model.dto.InverterDTO;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -10,6 +12,8 @@ import java.io.Serializable;
 @Table(name = "inverter", schema = "public")
 public class Inverter implements Serializable {
     private long id;
+    private String tag;
+    private String description;
     private User user;
     private String token;
     private String producer;
@@ -28,8 +32,28 @@ public class Inverter implements Serializable {
         this.id = id;
     }
 
+    @Basic
+    @Column(name = "tag", unique = true, nullable = false, insertable = true, updatable = true, length = 16)
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
+
+    @Basic
+    @Column(name = "description")
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String name) {
+        this.description = name;
+    }
+
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="user_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
     public User getUser() {
         return user;
     }
@@ -38,8 +62,8 @@ public class Inverter implements Serializable {
         this.user = user;
     }
 
-    @Basic(fetch = FetchType.LAZY)
-    @Column(name = "token",  nullable = false)
+    @Basic
+    @Column(name = "token", length = 32)
     public String getToken() {
         return token;
     }
@@ -48,8 +72,8 @@ public class Inverter implements Serializable {
         this.token = token;
     }
 
-    @Basic(fetch = FetchType.LAZY)
-    @Column(name = "producer",  nullable = true)
+    @Basic
+    @Column(name = "producer", nullable = true)
     public String getProducer() {
         return producer;
     }
@@ -58,7 +82,7 @@ public class Inverter implements Serializable {
         this.producer = producer;
     }
 
-    @Basic(fetch = FetchType.LAZY)
+    @Basic
     @Column(name = "model", nullable = true)
     public String getModel() {
         return model;
@@ -68,7 +92,7 @@ public class Inverter implements Serializable {
         this.model = model;
     }
 
-    @Basic(fetch = FetchType.LAZY)
+    @Basic
     @Column(name = "max_power", nullable = false)
     public int getMaxPower() {
         return maxPower;
@@ -76,5 +100,12 @@ public class Inverter implements Serializable {
 
     public void setMaxPower(int maxPower) {
         this.maxPower = maxPower;
+    }
+
+    public InverterDTO toDTO() {
+        return new InverterDTO(getDescription(),
+                getModel(),
+                getProducer(),
+                getMaxPower());
     }
 }

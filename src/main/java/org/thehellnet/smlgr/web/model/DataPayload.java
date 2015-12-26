@@ -2,7 +2,9 @@ package org.thehellnet.smlgr.web.model;
 
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
+import org.thehellnet.smlgr.web.controller.api.dto.request.InverterPayloadRequestDTOApi;
 import org.thehellnet.smlgr.web.model.dto.DataPayloadDTO;
+import org.thehellnet.smlgr.web.model.dto.DataPayloadSimpleDTO;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -34,19 +36,19 @@ public class DataPayload implements Serializable {
         setDateTime(new DateTime());
     }
 
-    public DataPayload(DataPayloadDTO item) {
+    public DataPayload(Inverter inverter, InverterPayloadRequestDTOApi dto) {
+        setInverter(inverter);
         setDateTime(new DateTime());
-
-        setAcPower(item.getAc_power());
-        setAcVoltage(item.getAc_voltage());
-        setAcCurrent(item.getAc_current());
-        setAcFrequency(item.getAc_frequency());
-        setDc1Voltage(item.getDc1_voltage());
-        setDc1Current(item.getDc1_current());
-        setDc2Voltage(item.getDc2_voltage());
-        setDc2Current(item.getDc2_current());
-        setTemperature(item.getTemperature());
-        setProduction(item.getProduction());
+        setAcPower(dto.ac_power);
+        setAcVoltage(dto.ac_voltage);
+        setAcCurrent(dto.ac_current);
+        setAcFrequency(dto.ac_frequency);
+        setDc1Voltage(dto.dc1_voltage);
+        setDc1Current(dto.dc1_current);
+        setDc2Voltage(dto.dc2_voltage);
+        setDc2Current(dto.dc2_current);
+        setTemperature(dto.temperature);
+        setProduction(dto.production);
     }
 
     @Id
@@ -61,7 +63,7 @@ public class DataPayload implements Serializable {
         this.id = id;
     }
 
-    @Basic(fetch = FetchType.LAZY)
+    @Basic
     @Column(name = "whenquery", insertable = true, updatable = true)
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
     public DateTime getDateTime() {
@@ -82,7 +84,7 @@ public class DataPayload implements Serializable {
         this.inverter = inverter;
     }
 
-    @Basic(fetch = FetchType.LAZY)
+    @Basic
     @Column(name = "ac_power", insertable = true, updatable = true)
     public int getAcPower() {
         return acPower;
@@ -92,7 +94,7 @@ public class DataPayload implements Serializable {
         this.acPower = acPower;
     }
 
-    @Basic(fetch = FetchType.LAZY)
+    @Basic
     @Column(name = "ac_voltage", insertable = true, updatable = true)
     public int getAcVoltage() {
         return acVoltage;
@@ -102,7 +104,7 @@ public class DataPayload implements Serializable {
         this.acVoltage = acVoltage;
     }
 
-    @Basic(fetch = FetchType.LAZY)
+    @Basic
     @Column(name = "ac_current", insertable = true, updatable = true)
     public int getAcCurrent() {
         return acCurrent;
@@ -112,7 +114,7 @@ public class DataPayload implements Serializable {
         this.acCurrent = acCurrent;
     }
 
-    @Basic(fetch = FetchType.LAZY)
+    @Basic
     @Column(name = "ac_frequency", insertable = true, updatable = true)
     public int getAcFrequency() {
         return acFrequency;
@@ -122,7 +124,7 @@ public class DataPayload implements Serializable {
         this.acFrequency = acFrequency;
     }
 
-    @Basic(fetch = FetchType.LAZY)
+    @Basic
     @Column(name = "dc1_voltage", insertable = true, updatable = true)
     public int getDc1Voltage() {
         return dc1Voltage;
@@ -132,7 +134,7 @@ public class DataPayload implements Serializable {
         this.dc1Voltage = dc1Voltage;
     }
 
-    @Basic(fetch = FetchType.LAZY)
+    @Basic
     @Column(name = "dc1_current", insertable = true, updatable = true)
     public int getDc1Current() {
         return dc1Current;
@@ -142,7 +144,7 @@ public class DataPayload implements Serializable {
         this.dc1Current = dc1Current;
     }
 
-    @Basic(fetch = FetchType.LAZY)
+    @Basic
     @Column(name = "dc2_voltage", insertable = true, updatable = true)
     public int getDc2Voltage() {
         return dc2Voltage;
@@ -152,7 +154,7 @@ public class DataPayload implements Serializable {
         this.dc2Voltage = dc2Voltage;
     }
 
-    @Basic(fetch = FetchType.LAZY)
+    @Basic
     @Column(name = "dc2_current", insertable = true, updatable = true)
     public int getDc2Current() {
         return dc2Current;
@@ -162,7 +164,7 @@ public class DataPayload implements Serializable {
         this.dc2Current = dc2Current;
     }
 
-    @Basic(fetch = FetchType.LAZY)
+    @Basic
     @Column(name = "temperature", insertable = true, updatable = true)
     public int getTemperature() {
         return temperature;
@@ -172,7 +174,7 @@ public class DataPayload implements Serializable {
         this.temperature = temperature;
     }
 
-    @Basic(fetch = FetchType.LAZY)
+    @Basic
     @Column(name = "production", insertable = true, updatable = true)
     public int getProduction() {
         return production;
@@ -180,5 +182,23 @@ public class DataPayload implements Serializable {
 
     public void setProduction(int production) {
         this.production = production;
+    }
+
+    public DataPayloadDTO toDTO() {
+        return new DataPayloadDTO(getDateTime(),
+                getAcPower(),
+                getAcVoltage(),
+                getAcCurrent(),
+                getAcFrequency(),
+                getDc1Voltage(),
+                getDc1Current(),
+                getDc2Voltage(),
+                getDc2Current(),
+                getTemperature(),
+                getProduction());
+    }
+
+    public DataPayloadSimpleDTO toSimpleDTO() {
+        return new DataPayloadSimpleDTO(getDateTime(), getAcPower());
     }
 }

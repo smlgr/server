@@ -1,13 +1,15 @@
 package org.thehellnet.smlgr.web.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.*;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.orm.jpa.support.OpenEntityManagerInViewInterceptor;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.accept.ContentNegotiationManager;
 import org.springframework.web.context.ContextLoaderListener;
-import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.servlet.View;
@@ -19,6 +21,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.view.ContentNegotiatingViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
+import org.thehellnet.smlgr.web.serializer.DateTimeJsonSerializer;
 
 import javax.persistence.EntityManagerFactory;
 import javax.servlet.ServletContext;
@@ -29,15 +32,14 @@ import java.util.List;
 import java.util.Locale;
 
 /**
- * Created by sardylan on 14/05/15.
+ * Created by sardylan on 26/09/15.
  */
-
 @Configuration
 @ImportResource("classpath:application.xml")
-@PropertySource("classpath:properties/database.properties")
 @ComponentScan(basePackages = "org.thehellnet.smlgr.web")
 @EnableWebMvc
 public class MvcConfiguration extends WebMvcConfigurerAdapter implements WebApplicationInitializer {
+
     @Autowired
     private EntityManagerFactory entityManagerFactory;
 
@@ -75,7 +77,7 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter implements WebAppl
     @Bean
     public InternalResourceViewResolver jspViewResolver() {
         InternalResourceViewResolver bean = new InternalResourceViewResolver();
-        bean.setPrefix("/WEB-INF/pages/");
+        bean.setPrefix("/");
         bean.setSuffix(".jsp");
         return bean;
     }
@@ -92,6 +94,11 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter implements WebAppl
         resolver.setViewResolvers(resolvers);
         resolver.setContentNegotiationManager(manager);
         return resolver;
+    }
+
+    @Bean
+    public DateTimeJsonSerializer dateTimeJsonSerializer() {
+        return new DateTimeJsonSerializer();
     }
 
     @Override
